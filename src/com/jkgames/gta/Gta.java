@@ -4,11 +4,7 @@
 
 package com.jkgames.gta;
 
-import com.jkgames.gta.R.array;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,49 +15,46 @@ import android.view.View.OnClickListener;
 public class Gta extends Activity implements OnClickListener
 {
     @Override
-    public void onCreate(Bundle savedInstanceState) 
+    public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-       
-       View newGameButton = findViewById(R.id.new_game_button);
-       newGameButton.setOnClickListener(this);
+
+        View newGameButton = findViewById(R.id.new_game_button);
+        newGameButton.setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-    	super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-    	switch(item.getItemId())
-    	{
-    	case R.id.exit_button:
-    		finish();
-    		return true;
-    	}
-    	return false;
+        if (item.getItemId() == R.id.exit_button)
+        {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-	public void onClick(View v) 
-	{
-		switch(v.getId())
-		{
-		case R.id.new_game_button:
-			startNewGame();
-			break;
-		}
-		
-	}
-	
-	private void startNewGame()
-	{
-		Intent gIntent = new Intent(this,Game.class);
-		startActivity(gIntent);
-	}
+    @Override
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.new_game_button)
+        {
+            startNewGame();
+        }
+    }
+
+    private void startNewGame()
+    {
+        Intent gIntent = new Intent(this, Game.class);
+        startActivity(gIntent);
+    }
 }
